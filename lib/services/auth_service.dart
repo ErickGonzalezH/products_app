@@ -10,7 +10,7 @@ class AuthService extends ChangeNotifier{
   final String _baseUrl = 'identitytoolkit.googleapis.com';
   //Token de acceso al API Farebase
   final String _firebaseToken = 'AIzaSyBrgJVadtqmk4TW2z_LakTqVHcixFfaajc';
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
 
 
@@ -22,6 +22,7 @@ class AuthService extends ChangeNotifier{
     final Map<String, dynamic> authData = {
       'email': email, 
       'password': password,
+      'sturnSecureToken': true,
       'returnSecureToken' : true
     };
 
@@ -53,6 +54,7 @@ class AuthService extends ChangeNotifier{
     final Map<String, dynamic> authData = {
       'email': email, 
       'password': password,
+      'sturnSecureToken': true,
       'returnSecureToken' : true
     };
 
