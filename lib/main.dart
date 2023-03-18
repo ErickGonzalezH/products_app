@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
 
       title: 'Productos App',
 
-      initialRoute: 'Home',
+      initialRoute: 'Login',
 
       //Rutas de pantallas a mostrar en la aplicación.
       routes: {
