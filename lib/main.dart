@@ -15,7 +15,8 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: ( _ ) => ProductsService() )
+        ChangeNotifierProvider(create: ( _ ) => AuthService() ),
+        ChangeNotifierProvider(create: ( _ ) => ProductsService() ),
       ],
       child: const MyApp(),
     );
@@ -39,10 +40,17 @@ class MyApp extends StatelessWidget {
 
       //Rutas de pantallas a mostrar en la aplicación.
       routes: {
-        'Login' : ( _ ) => const LoginScreen(),
-        'Home' : ( _ ) => const HomeScreen(),
-        'Product' : ( _ ) => ProductScreen(),
+        'Checking' : ( _ ) => const CheckAuthScreen(), 
+
+        'Product'  : ( _ ) => ProductScreen(),
+        'Home'     : ( _ ) => const HomeScreen(),
+        
+        'Login'    : ( _ ) => const LoginScreen(),
+        'Register' : ( _ ) => const RegisterScreen(),
+
       },
+
+      scaffoldMessengerKey: NotificationsService.messengerKey,
 
       //Cambiar globalmente el tema de los scaffold, appbar, FloatinActionButton
       theme: ThemeData.light().copyWith(

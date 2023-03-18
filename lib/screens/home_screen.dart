@@ -17,12 +17,25 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final productsService = Provider.of<ProductsService>(context);
+    final authService = Provider.of<AuthService>(context, listen: false);
 
     if( productsService.isLoading ) return LoadingScreen();
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Productos'),
+        //boton para LogOut
+        actions: [
+          IconButton(
+            onPressed: () {
+              
+              authService.logout();
+              Navigator.pushReplacementNamed(context, 'Login');
+
+            }, 
+            icon: const Icon ( Icons.login_outlined )
+          )
+        ],
       ),
 
       //Listview builder crea widgets cuando se esta cerca de abrir la pantalla.

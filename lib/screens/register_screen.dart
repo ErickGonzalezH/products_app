@@ -9,9 +9,9 @@ import 'package:products_app/widgets/widgets.dart';
 
 
 
-class LoginScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget {
    
-  const LoginScreen({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
 
                       const SizedBox( height: 10 ),
-                      Text('Ingresar', style: Theme.of(context).textTheme.headline4),
+                      Text('Crear cuenta', style: Theme.of(context).textTheme.headline4),
                       const SizedBox( height: 30 ),
 
                       ChangeNotifierProvider(
@@ -42,16 +42,16 @@ class LoginScreen extends StatelessWidget {
 
                 const SizedBox( height: 50 ),
 
-                //Boton para redirigir al registro de cuenta
+                //Boton para redirigir al login, donde ya se tiene una cuenta
                 TextButton(
-                  onPressed: () => Navigator.pushReplacementNamed(context, 'Register'), 
+                  onPressed: () => Navigator.pushReplacementNamed(context, 'Login'), 
                   style: ButtonStyle(
                     overlayColor: MaterialStateProperty.all( Colors.indigo.withOpacity(0.1)),
                     shape: MaterialStateProperty.all( const StadiumBorder() ),
                   ),
-                  child: const Text('Crear una nueva cuenta', style: TextStyle( fontSize: 18, color: Colors.black87 ) ),
+                  child: const Text('¿Ya tienes una cuenta?', style: TextStyle( fontSize: 18, color: Colors.black87 ) ),
                 ),
-                
+
                 const SizedBox( height: 50 ),
                 
 
@@ -142,6 +142,7 @@ class _LoginForm extends StatelessWidget {
               elevation: 0,
               color: Colors.deepPurple,
 
+              //Boton para el validar el login
               onPressed: loginForm.isLoading ? null : () async { 
                 //Quitar el teclado 
                 FocusScope.of(context).unfocus();
@@ -153,20 +154,18 @@ class _LoginForm extends StatelessWidget {
                 loginForm.isLoading = true;
 
                 //Validar si el correo es correcto.
-                final String? errorMessage = await authService.login(loginForm.email, loginForm.password);
+                final String? errorMessage = await authService.createUser(loginForm.email, loginForm.password);
                 if ( errorMessage == null ){
 
                   Navigator.pushReplacementNamed(context, 'Home');
 
                 } else {
 
-                  // mostrar error en pantalla
-                  // print(errorMessage);
-
-                  NotificationsService.showSnackbar(errorMessage);
-                  
+                  //TODO: mostrar error en pantalla
+                  print(errorMessage);
                   loginForm.isLoading = false;
                 }
+                
               },
               
               child: Container(
@@ -174,7 +173,7 @@ class _LoginForm extends StatelessWidget {
                 child: Text(
                   loginForm.isLoading
                    ? 'espere'
-                   : 'Ingresar',
+                   : 'Crear',
                   style: const TextStyle( color: Colors.white ),
                 ),
               ),
@@ -187,6 +186,4 @@ class _LoginForm extends StatelessWidget {
       ),
     );
   }
-  
 }
-
