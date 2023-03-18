@@ -9,6 +9,7 @@ class InputDecorations{
     IconData? prefixIcon,
 
   }) {
+
     return InputDecoration(
                 enabledBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(
